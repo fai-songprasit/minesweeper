@@ -34,7 +34,7 @@ var board = {
 
 function startGame () {
   // Don't remove this function call: it makes the game work!
-  var countSurroundingingMines = 0;
+  var countSurroundingMines = 0;
   for (i = 0; i < board.cells.length; i++) {
     if (board.cells[i] === board.cells.isMine) {
       countSurroundingMines++;
@@ -68,12 +68,38 @@ function checkForWin () {
 // It will return cell objects in an array. You should loop through 
 // them, counting the number of times `cell.isMine` is true.
 function countSurroundingMines (cell) {
-  let surroundingCell = [];
+  let surroundingMines = [];
   let count = 0;
-  for (const cell in surroundingCell) {
+  for (const cell in surroundingMines) {
     if (board[cell].isMine === true) {
       count++;
     }
   return count
   }
 }
+
+/* DOODLES ARE DOWN HERE!!!!
+// possible random function for placing mines
+const placeMines = () => {
+  let i = 0;
+  let j = 0;
+  row = i;
+  col = j;
+  for (let mines = 0; mines < 9; mines++) {
+    i = Math.floor(Math.random() * 4);
+    j = Math.floor(Math.random() * 4);
+// finds the correct array with relevant i and j values
+      for (var k = 0; k < board.cells.length; k += 1) {
+        if ((board.cells[k].i && board.cells[k].j) === (i && j)) {
+            return k;
+        }
+      }
+    if (mines < 9 && board.cell[k]){
+      board.cells[k].isMine === true;
+      mines++;
+    } else {
+      board.cells[k].isMine === false;
+    }
+  }
+}
+*/
