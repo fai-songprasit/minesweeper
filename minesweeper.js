@@ -4,31 +4,31 @@ const newLocal = 0
 // Define your `board` object here!
 var board = {
   cells: [
-    {row: 0, col: 0, isMine: true, hidden: true, surroundingMines: 0}, 
-    {row: 0, col: 1, isMine: true, hidden: true, surroundingMines: 0}, 
-    {row: 0, col: 2, isMine: true, hidden: true, surroundingMines: 0}, 
-    {row: 0, col: 3, isMine: true, hidden: true, surroundingMines: 0}, 
-    {row: 0, col: 4, isMine: true, hidden: true, surroundingMines: 0}, 
-    {row: 1, col: 0, isMine: true, hidden: true, surroundingMines: 0}, 
-    {row: 1, col: 1, isMine: true, hidden: true, surroundingMines: 0}, 
-    {row: 1, col: 2, isMine: true, hidden: true, surroundingMines: 0}, 
-    {row: 1, col: 3, isMine: false, hidden: true, surroundingMines: 0}, 
-    {row: 1, col: 4, isMine: false, hidden: true, surroundingMines: 0}, 
-    {row: 2, col: 0, isMine: false, hidden: true, surroundingMines: 0}, 
-    {row: 2, col: 1, isMine: false, hidden: true, surroundingMines: 0}, 
-    {row: 2, col: 2, isMine: false, hidden: true, surroundingMines: 0}, 
-    {row: 2, col: 3, isMine: false, hidden: true, surroundingMines: 0}, 
-    {row: 2, col: 4, isMine: false, hidden: true, surroundingMines: 0}, 
-    {row: 3, col: 0, isMine: false, hidden: true, surroundingMines: 0}, 
-    {row: 3, col: 1, isMine: false, hidden: true, surroundingMines: 0}, 
-    {row: 3, col: 2, isMine: false, hidden: true, surroundingMines: 0}, 
-    {row: 3, col: 3, isMine: false, hidden: true, surroundingMines: 0}, 
-    {row: 3, col: 4, isMine: false, hidden: true, surroundingMines: 0}, 
-    {row: 4, col: 0, isMine: false, hidden: true, surroundingMines: 0}, 
-    {row: 4, col: 1, isMine: false, hidden: true, surroundingMines: 0}, 
-    {row: 4, col: 2, isMine: false, hidden: true, surroundingMines: 0}, 
-    {row: 4, col: 3, isMine: false, hidden: true, surroundingMines: 0}, 
-    {row: 4, col: 4, isMine: false, hidden: true, surroundingMines: 0}
+    {row: 0, col: 0, isMine: true, hidden: true}, 
+    {row: 0, col: 1, isMine: true, hidden: true}, 
+    {row: 0, col: 2, isMine: true, hidden: true}, 
+    {row: 0, col: 3, isMine: true, hidden: true}, 
+    {row: 0, col: 4, isMine: true, hidden: true}, 
+    {row: 1, col: 0, isMine: true, hidden: true}, 
+    {row: 1, col: 1, isMine: true, hidden: true}, 
+    {row: 1, col: 2, isMine: true, hidden: true}, 
+    {row: 1, col: 3, isMine: false, hidden: true}, 
+    {row: 1, col: 4, isMine: false, hidden: true}, 
+    {row: 2, col: 0, isMine: false, hidden: true}, 
+    {row: 2, col: 1, isMine: false, hidden: true}, 
+    {row: 2, col: 2, isMine: false, hidden: true}, 
+    {row: 2, col: 3, isMine: false, hidden: true}, 
+    {row: 2, col: 4, isMine: false, hidden: true}, 
+    {row: 3, col: 0, isMine: false, hidden: true}, 
+    {row: 3, col: 1, isMine: false, hidden: true}, 
+    {row: 3, col: 2, isMine: false, hidden: true}, 
+    {row: 3, col: 3, isMine: false, hidden: true}, 
+    {row: 3, col: 4, isMine: false, hidden: true}, 
+    {row: 4, col: 0, isMine: false, hidden: true}, 
+    {row: 4, col: 1, isMine: false, hidden: true}, 
+    {row: 4, col: 2, isMine: false, hidden: true}, 
+    {row: 4, col: 3, isMine: false, hidden: true}, 
+    {row: 4, col: 4, isMine: false, hidden: true}
   ]
 }
 
@@ -61,18 +61,15 @@ function checkForWin () {
 // It will return cell objects in an array. You should loop through 
 // them, counting the number of times `cell.isMine` is true.
 function countSurroundingMines (cell) {
-  let surrounding = [];
   let count = 0;
-  cell = board.cells;
-
-  for (const cell in surrounding) {
-    surrounding = lib.getSurroundingCells(cell.row, cell.col);
-    if (cell.isMine === true) {
+  let surroundingCells = getSurroundingCells(cell.row, cell.col);
+  for (let i = 0; i < surroundingCells.length; i++) {
+    if (surroundingCells[i].isMine === true) {
       count++;
     }
-    return count
+    cell.surroundingMines = count;
   }
-  cell.surroundingMines = count;
+  return count
 }
 
 /* DOODLES ARE DOWN HERE!!!!
