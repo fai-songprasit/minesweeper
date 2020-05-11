@@ -4,38 +4,41 @@ const newLocal = 0
 // Define your `board` object here!
 var board = {
   cells: [
-    {row: 0, col: 0, isMine: true, hidden: true}, 
-    {row: 0, col: 1, isMine: true, hidden: true}, 
-    {row: 0, col: 2, isMine: true, hidden: true}, 
-    {row: 0, col: 3, isMine: true, hidden: true}, 
-    {row: 0, col: 4, isMine: true, hidden: true}, 
-    {row: 1, col: 0, isMine: true, hidden: true}, 
-    {row: 1, col: 1, isMine: true, hidden: true}, 
-    {row: 1, col: 2, isMine: true, hidden: true}, 
-    {row: 1, col: 3, isMine: false, hidden: true}, 
-    {row: 1, col: 4, isMine: false, hidden: true}, 
-    {row: 2, col: 0, isMine: false, hidden: true}, 
-    {row: 2, col: 1, isMine: false, hidden: true}, 
-    {row: 2, col: 2, isMine: false, hidden: true}, 
-    {row: 2, col: 3, isMine: false, hidden: true}, 
-    {row: 2, col: 4, isMine: false, hidden: true}, 
-    {row: 3, col: 0, isMine: false, hidden: true}, 
-    {row: 3, col: 1, isMine: false, hidden: true}, 
-    {row: 3, col: 2, isMine: false, hidden: true}, 
-    {row: 3, col: 3, isMine: false, hidden: true}, 
-    {row: 3, col: 4, isMine: false, hidden: true}, 
-    {row: 4, col: 0, isMine: false, hidden: true}, 
-    {row: 4, col: 1, isMine: false, hidden: true}, 
-    {row: 4, col: 2, isMine: false, hidden: true}, 
-    {row: 4, col: 3, isMine: false, hidden: true}, 
-    {row: 4, col: 4, isMine: false, hidden: true}
+    {row: 0, col: 0,  isMine: false, isMarked: false, hidden: true}, 
+    {row: 0, col: 1,  isMine: false, isMarked: false, hidden: true}, 
+    {row: 0, col: 2,  isMine: false, isMarked: false, hidden: true}, 
+    {row: 0, col: 3,  isMine: false, isMarked: false, hidden: true}, 
+    {row: 0, col: 4,  isMine: false, isMarked: false, hidden: true}, 
+    {row: 1, col: 0,  isMine: false, isMarked: false, hidden: true}, 
+    {row: 1, col: 1,  isMine: false, isMarked: false, hidden: true}, 
+    {row: 1, col: 2,  isMine: false, isMarked: false, hidden: true}, 
+    {row: 1, col: 3,  isMine: false, isMarked: false, hidden: true}, 
+    {row: 1, col: 4,  isMine: false, isMarked: false, hidden: true}, 
+    {row: 2, col: 0,  isMine: false, isMarked: false, hidden: true}, 
+    {row: 2, col: 1,  isMine: false, isMarked: false, hidden: true}, 
+    {row: 2, col: 2,  isMine: false, isMarked: false, hidden: true}, 
+    {row: 2, col: 3,  isMine: false, isMarked: false, hidden: true}, 
+    {row: 2, col: 4,  isMine: false, isMarked: false, hidden: true}, 
+    {row: 3, col: 0,  isMine: false, isMarked: false, hidden: true}, 
+    {row: 3, col: 1,  isMine: false, isMarked: false, hidden: true}, 
+    {row: 3, col: 2,  isMine: false, isMarked: false, hidden: true}, 
+    {row: 3, col: 3,  isMine: false, isMarked: false, hidden: true}, 
+    {row: 3, col: 4,  isMine: false, isMarked: false, hidden: true}, 
+    {row: 4, col: 0,  isMine: false, isMarked: false, hidden: true}, 
+    {row: 4, col: 1,  isMine: false, isMarked: false, hidden: true}, 
+    {row: 4, col: 2,  isMine: false, isMarked: false, hidden: true}, 
+    {row: 4, col: 3,  isMine: false, isMarked: false, hidden: true}, 
+    {row: 4, col: 4,  isMine: false, isMarked: false, hidden: true}
   ]
 }
 
 function startGame () {
+  placeMines()
   // Don't remove this function call: it makes the game work!
   for (let i = 0; i < board.cells.length; i++) {
     board.cells[i].surroundingMines = countSurroundingMines(board.cells[i]);
+    document.addEventListener('click', checkForWin);
+    document.addEventListener('contextmenu', checkForWin);
   }
   lib.initBoard()
 }
@@ -44,11 +47,17 @@ function startGame () {
 //
 // 1. Are all of the cells that are NOT mines visible?
 // 2. Are all of the mines marked?
-function checkForWin () {
-
+function checkForWin () { //fuction stops once first cell is marked ....
+  for (let i = 0; i < board.cells.length; i++) {
+    if ((board.cells[i].isMine === true) && (board.cells[i].isMarked !== true)) {
+      return;
+    } else if ((board.cells[i].isMine !== true) && (board.cells[i].hidden === true)) {
+      return;
+    } 
   // You can use this function call to declare a winner (once you've
   // detected that they've won, that is!)
-  //   lib.displayMessage('You win!')
+  }
+  displayMessage('You win!')
 }
 
 // Define this function to count the number of mines around the cell
@@ -71,28 +80,26 @@ function countSurroundingMines (cell) {
   return count
 }
 
-/* DOODLES ARE DOWN HERE!!!!
-// possible random function for placing mines
-const placeMines = () => {
-  let i = 0;
-  let j = 0;
-  row = i;
-  col = j;
-  for (let mines = 0; mines < 7; mines++) {
-    i = Math.floor(Math.random() * 4);
-    j = Math.floor(Math.random() * 4);
-// finds the correct array with relevant i and j values
-      for (var k = 0; k < board.cells.length; k += 1) {
-        if ((board.cells[k].i && board.cells[k].j) === (i && j)) {
-            return k;
-        }
+function countMines() {
+  var count = 0
+  for (var i = 0; i < board.cells.length; i++) {
+      if (board.cells[i].isMine) {
+        count++
       }
-    if (mines < 9 && board.cell[k]){
-      board.cells[k].isMine === true;
-      mines++;
-    } else {
-      board.cells[k].isMine === false;
-    }
+  }
+    return count 
+}
+
+// use count to set limit on number of mines on board
+function placeMines() {
+  var numberOfMines = Math.floor(board.cells.length / 4)
+     while (countMines() < numberOfMines) {
+    // create random index that loops until count condition is met
+     var cell = board.cells[Math.floor(Math.random() * 25)]
+     placeMine(cell)
   }
 }
-*/
+
+function placeMine(cell) {
+  cell.isMine = true
+}
