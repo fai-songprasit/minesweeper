@@ -12,7 +12,7 @@ var board = {
     {row: 1, col: 0,  isMine: false, isMarked: false, hidden: true}, 
     {row: 1, col: 1,  isMine: false, isMarked: false, hidden: true}, 
     {row: 1, col: 2,  isMine: false, isMarked: false, hidden: true}, 
-    {row: 1, col: 3,  isMine: false, isMarked: false, hidden: true}, 
+    {row: 1, col: 3,  isMine: false, isMarked: false, hidden: true},
     {row: 1, col: 4,  isMine: false, isMarked: false, hidden: true}, 
     {row: 2, col: 0,  isMine: false, isMarked: false, hidden: true}, 
     {row: 2, col: 1,  isMine: false, isMarked: false, hidden: true}, 
